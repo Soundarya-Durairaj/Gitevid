@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}Blog - My Flask Website{% endblock %}
+
+{% block content %}
+<section class="blog">
+    <h1>Blog</h1>
+    <div class="blog-content">
+        <div class="posts">
+            {% for post in posts %}
+                <article>
+                    <h2><a href="{{ url_for('post_detail', post_id=post.id) }}">{{ post.title }}</a></h2>
+                    <p>{{ post.summary }}</p>
+                </article>
+            {% endfor %}
+        </div>
+        <aside class="sidebar">
+            <h3>Recent Posts</h3>
+            <ul>
+                {% for post in posts %}
+                    <li><a href="{{ url_for('post_detail', post_id=post.id) }}">{{ post.title }}</a></li>
+                {% endfor %}
+            </ul>
+        </aside>
+    </div>
+</section>
+{% endblock %}

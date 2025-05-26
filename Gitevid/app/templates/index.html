@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block title %}Gitevid{% endblock %}
+
+{% block content %}
+<!-- Blog Section with Carousel -->
+<section class="blog-preview py-5">
+    <div class="container">
+        <h2 class="text-center text-white mb-4">Latest Blog Posts</h2>
+        
+        <!-- Bootstrap Carousel for blog posts -->
+        <div id="postCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                {% for post in posts %}
+                    <div class="carousel-item {% if loop.first %}active{% endif %}">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ post.title }}</h5>
+                                <p class="card-text">{{ post.excerpt }}</p>
+                                <a href="{{ url_for('post_detail', post_id=post.id) }}" class="btn btn-primary">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
+            <!-- Carousel Controls -->
+            <button class="carousel-control-prev" type="button" data-bs-target="#postCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#postCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+</section>
+
+<!-- Fade-in animation for posts -->
+<script>
+    window.onload = function() {
+        document.querySelector('.blog-preview').classList.add('fadeIn');
+    }
+</script>
+{% endblock %}
